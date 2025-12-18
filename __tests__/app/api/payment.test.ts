@@ -1,6 +1,22 @@
 import { POST } from '@/app/api/payment/route'
-import { NextRequest } from 'next/server'
 import db from '@/utils/db'
+
+// Mock NextRequest
+const createMockRequest = (url: string, options?: RequestInit) => {
+  return {
+    url,
+    method: options?.method || 'GET',
+    headers: new Headers(options?.headers),
+    json: async () => {
+      if (options?.body) {
+        return typeof options.body === 'string' 
+          ? JSON.parse(options.body) 
+          : options.body
+      }
+      return {}
+    },
+  } as any
+}
 
 // Mock Stripe
 jest.mock('stripe', () => {
@@ -56,7 +72,7 @@ describe('/api/payment', () => {
     const stripeInstance = new Stripe()
     stripeInstance.checkout.sessions.create.mockResolvedValue(mockSession)
 
-    const request = new NextRequest('http://localhost:3000/api/payment', {
+    const request = createMockRequest('http://localhost:3000/api/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +102,7 @@ describe('/api/payment', () => {
   it('should return 404 when booking not found', async () => {
     ;(db.booking.findUnique as jest.Mock).mockResolvedValue(null)
 
-    const request = new NextRequest('http://localhost:3000/api/payment', {
+    const request = createMockRequest('http://localhost:3000/api/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -125,7 +141,7 @@ describe('/api/payment', () => {
       new Error('Stripe error')
     )
 
-    const request = new NextRequest('http://localhost:3000/api/payment', {
+    const request = createMockRequest('http://localhost:3000/api/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -136,6 +152,6 @@ describe('/api/payment', () => {
 
     const response = await POST(request)
 
-    expect(response.status).toBe(500)
+    expect(response.status).toBe(502) // ExternalServiceError returns 502
   })
 })

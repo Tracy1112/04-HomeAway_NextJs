@@ -17,8 +17,8 @@ jest.mock('next/link', () => {
 
 jest.mock('next/image', () => {
   return function MockImage({ src, alt, ...props }: any) {
-    // Remove fill prop to avoid React warning
-    const { fill, ...restProps } = props
+    // Remove Next.js Image specific props to avoid React warnings
+    const { fill, priority, sizes, ...restProps } = props
     return <img src={src} alt={alt} {...restProps} />
   }
 })

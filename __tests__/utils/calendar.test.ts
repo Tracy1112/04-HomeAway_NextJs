@@ -75,21 +75,30 @@ describe('Calendar Utilities', () => {
 
   describe('generateDisabledDates', () => {
     it('should generate disabled dates object', () => {
-      const today = new Date('2024-01-15')
-      today.setHours(0, 0, 0, 0)
+      // Use future dates to ensure they're not filtered out
+      const futureDate = new Date()
+      futureDate.setDate(futureDate.getDate() + 10) // 10 days from now
+      const futureDateEnd = new Date(futureDate)
+      futureDateEnd.setDate(futureDateEnd.getDate() + 2) // 2 days after
 
       const disabledDays = [
         {
-          from: new Date('2024-01-20'),
-          to: new Date('2024-01-22'),
+          from: futureDate,
+          to: futureDateEnd,
         },
       ]
 
       const disabled = generateDisabledDates(disabledDays)
 
-      expect(disabled['2024-01-20']).toBe(true)
-      expect(disabled['2024-01-21']).toBe(true)
-      expect(disabled['2024-01-22']).toBe(true)
+      const dateString1 = futureDate.toISOString().split('T')[0]
+      const dateString2 = new Date(futureDate.getTime() + 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split('T')[0]
+      const dateString3 = futureDateEnd.toISOString().split('T')[0]
+
+      expect(disabled[dateString1]).toBe(true)
+      expect(disabled[dateString2]).toBe(true)
+      expect(disabled[dateString3]).toBe(true)
     })
 
     it('should not include past dates', () => {

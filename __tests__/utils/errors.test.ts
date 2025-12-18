@@ -196,8 +196,11 @@ describe('Validation Functions', () => {
 
   describe('validateDateRange', () => {
     it('should pass for valid date range', () => {
-      const checkIn = new Date('2024-01-01')
-      const checkOut = new Date('2024-01-05')
+      // Use future dates to ensure they pass validation
+      const checkIn = new Date()
+      checkIn.setDate(checkIn.getDate() + 10) // 10 days from now
+      const checkOut = new Date(checkIn)
+      checkOut.setDate(checkOut.getDate() + 5) // 5 days after check-in
       expect(() => validateDateRange(checkIn, checkOut)).not.toThrow()
     })
 

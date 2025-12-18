@@ -1,6 +1,14 @@
 import { GET } from '@/app/api/confirm/route'
-import { NextRequest } from 'next/server'
 import db from '@/utils/db'
+
+// Mock NextRequest
+const createMockRequest = (url: string) => {
+  return {
+    url,
+    method: 'GET',
+    headers: new Headers(),
+  } as any
+}
 import { redirect } from 'next/navigation'
 
 // Mock Stripe
@@ -56,7 +64,7 @@ describe('/api/confirm', () => {
       paymentStatus: true,
     })
 
-    const request = new NextRequest(
+    const request = createMockRequest(
       'http://localhost:3000/api/confirm?session_id=session_123'
     )
 
@@ -92,7 +100,7 @@ describe('/api/confirm', () => {
     stripeInstance.checkout.sessions.retrieve.mockResolvedValue(mockSession)
     ;(db.booking.findUnique as jest.Mock).mockResolvedValue(mockBooking)
 
-    const request = new NextRequest(
+    const request = createMockRequest(
       'http://localhost:3000/api/confirm?session_id=session_123'
     )
 
@@ -103,7 +111,7 @@ describe('/api/confirm', () => {
   })
 
   it('should handle missing session_id', async () => {
-    const request = new NextRequest('http://localhost:3000/api/confirm')
+    const request = createMockRequest('http://localhost:3000/api/confirm')
 
     await GET(request)
 
@@ -120,7 +128,7 @@ describe('/api/confirm', () => {
     const stripeInstance = new Stripe()
     stripeInstance.checkout.sessions.retrieve.mockResolvedValue(mockSession)
 
-    const request = new NextRequest(
+    const request = createMockRequest(
       'http://localhost:3000/api/confirm?session_id=session_123'
     )
 
@@ -141,7 +149,7 @@ describe('/api/confirm', () => {
     const stripeInstance = new Stripe()
     stripeInstance.checkout.sessions.retrieve.mockResolvedValue(mockSession)
 
-    const request = new NextRequest(
+    const request = createMockRequest(
       'http://localhost:3000/api/confirm?session_id=session_123'
     )
 
@@ -163,7 +171,7 @@ describe('/api/confirm', () => {
     stripeInstance.checkout.sessions.retrieve.mockResolvedValue(mockSession)
     ;(db.booking.findUnique as jest.Mock).mockResolvedValue(null)
 
-    const request = new NextRequest(
+    const request = createMockRequest(
       'http://localhost:3000/api/confirm?session_id=session_123'
     )
 
@@ -179,7 +187,7 @@ describe('/api/confirm', () => {
       new Error('Stripe error')
     )
 
-    const request = new NextRequest(
+    const request = createMockRequest(
       'http://localhost:3000/api/confirm?session_id=session_123'
     )
 
@@ -207,7 +215,7 @@ describe('/api/confirm', () => {
     ;(db.booking.findUnique as jest.Mock).mockResolvedValue(mockBooking)
     ;(db.booking.update as jest.Mock).mockRejectedValue(new Error('Database error'))
 
-    const request = new NextRequest(
+    const request = createMockRequest(
       'http://localhost:3000/api/confirm?session_id=session_123'
     )
 

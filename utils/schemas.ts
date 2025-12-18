@@ -37,7 +37,20 @@ function validateFile() {
   const maxUploadSize = 1024 * 1024;
   const acceptedFilesTypes = ['image/'];
   return z
-    .instanceof(File)
+    .any()
+    .refine((file) => {
+      // Check if it's a File-like object (has File properties)
+      // This works in both browser and server environments
+      if (!file) return false;
+      return (
+        typeof file === 'object' &&
+        'name' in file &&
+        'size' in file &&
+        'type' in file &&
+        typeof file.size === 'number' &&
+        typeof file.type === 'string'
+      );
+    }, 'File must be a valid file object')
     .refine((file) => {
       return !file || file.size <= maxUploadSize;
     }, 'File size must be less than 1 MB')

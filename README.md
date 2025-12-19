@@ -619,6 +619,7 @@ This project showcases proficiency in:
 ## 📚 Documentation
 
 > **Note**: Additional documentation files are available in the repository but are excluded from GitHub per project configuration. Contact me for access to:
+>
 > - Project Transformation Plan
 > - Performance Optimizations Guide
 > - Testing Guide
@@ -646,7 +647,9 @@ MIT License - See LICENSE file for details
 Developed as a freelance project for Australian clients, demonstrating full-stack web development capabilities and production-ready code quality.
 
 ### 🎯 Project Purpose
+
 This project serves as a portfolio piece showcasing:
+
 - **Full-Stack Development**: End-to-end application development from database to UI
 - **Production-Ready Code**: Enterprise-level code quality, error handling, and testing
 - **Modern Tech Stack**: Latest industry-standard technologies and best practices
@@ -654,6 +657,7 @@ This project serves as a portfolio piece showcasing:
 - **Australian Market Experience**: Built specifically for Australian freelance clients
 
 ### 📧 Contact
+
 **Location**: Australia  
 **Availability**: Open to freelance and full-time opportunities  
 **Portfolio**: [Your portfolio URL]  
@@ -664,6 +668,7 @@ This project serves as a portfolio piece showcasing:
 ## 🌐 Live Demo
 
 <!-- If you have a deployed version, add the link here -->
+
 🔗 **Live Demo**: [Deploy on Vercel/Netlify and add link here]
 
 > 💡 **Note**: This is a portfolio project. For a live demonstration, please contact me directly.
@@ -673,7 +678,7 @@ This project serves as a portfolio piece showcasing:
 ## 📸 Screenshots
 
 <!-- Add screenshots of your application here -->
-<!-- 
+<!--
 ![Home Page](./screenshots/home.png)
 ![Property Details](./screenshots/property-details.png)
 ![Booking Flow](./screenshots/booking.png)

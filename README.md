@@ -678,13 +678,25 @@ This project serves as a portfolio piece showcasing:
 
 ## 📸 Screenshots
 
-<!-- Add screenshots of your application here -->
-<!--
-![Home Page](./screenshots/home.png)
-![Property Details](./screenshots/property-details.png)
-![Booking Flow](./screenshots/booking.png)
-![Admin Dashboard](./screenshots/admin.png)
--->
+### Home Page
+Browse available properties with advanced search and filtering options.
+
+![Home Page](./screenshots/home-page.png)
+
+### Booking Flow
+Complete booking process with dynamic pricing calculation and secure Stripe payment integration.
+
+![Booking Flow](./screenshots/booking-flow.png)
+
+### User Dashboard
+Manage bookings, view reservations, and access user account settings.
+
+![User Dashboard](./screenshots/user-dashboard.png)
+
+### Property Management
+Create and manage property listings with detailed information and image uploads.
+
+![Create Property](./screenshots/create-property.png)
 
 ---
 
